@@ -1,0 +1,36 @@
+# starts postgres db, Adminer and jupyter lab
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: sparkifydb
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: student
+    ports:
+      - 5432:5432
+    volumes:
+      - data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  jupiter:
+    image: jupyter/datascience-notebook:9b06df75e445
+    restart: always
+    environment:
+      JUPYTER_ENABLE_LAB: 'yes'
+      DB_HOST: 'db'
+    volumes:
+      - .:/home/jovyan/work
+    ports:
+      - 10000:8888
+
+volumes:
+  data: {}
