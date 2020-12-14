@@ -9,8 +9,10 @@ def create_database():
     - Returns the connection and cursor to sparkifydb
     """
     
-    # connect to default database
+    # read the database host from the environment variable DB_HOST or 
+    # use localhost as default value if not present
     db_host = os.getenv('DB_HOST', 'localhost')
+    # connect to default database
     conn = psycopg2.connect("host=%s dbname=studentdb user=student password=student" % db_host)
     conn.set_session(autocommit=True)
     cur = conn.cursor()
@@ -34,7 +36,6 @@ def drop_tables(cur, conn):
     Drops each table using the queries in `drop_table_queries` list.
     """
     for query in drop_table_queries:
-        # print(query)
         cur.execute(query)
         conn.commit()
 
@@ -44,7 +45,6 @@ def create_tables(cur, conn):
     Creates each table using the queries in `create_table_queries` list. 
     """
     for query in create_table_queries:
-        # print(query)
         cur.execute(query)
         conn.commit()
 
