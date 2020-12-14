@@ -7,7 +7,7 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_DB: sparkifydb
+      POSTGRES_DB: studentdb
       POSTGRES_USER: student
       POSTGRES_PASSWORD: student
     ports:
@@ -22,7 +22,7 @@ services:
       - 8080:8080
 
   jupiter:
-    image: jupyter/datascience-notebook:9b06df75e445
+    image: jupyter/datascience-notebook
     restart: always
     environment:
       JUPYTER_ENABLE_LAB: 'yes'
@@ -30,7 +30,7 @@ services:
     volumes:
       - .:/home/jovyan/work
     ports:
-      - 10000:8888
+      - 8888:8888
 
 volumes:
   data: {}
