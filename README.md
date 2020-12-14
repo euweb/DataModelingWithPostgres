@@ -35,3 +35,18 @@ If postgres and python are installed localy, you can run this project without do
 2. create database _studentdb_ and give user _student_ identified by _student_ password access to it
 3. run `python create_tables.py`
 4. run `python etl.py`
+
+## File list
+
+| Name                      	| Description                                                    	|
+|---------------------------	|----------------------------------------------------------------	|
+| data                      	| Folder containing JSON files                                   	|
+| create_tables.py          	| (re)creates tables in the database                             	|
+| Dashboard.ipyng           	| contains simple example of querieng the database               	|
+| docker-compose.yml        	| composer file to start docker container                        	|
+| etl.ipyng                 	| notebook to develop the etl pipeline                           	|
+| etl.py                    	| etl pipeline                                                   	|
+| InstallDependencies.ipyng 	| notebook to install nesessary python modules                   	|
+| README.md                 	| this documenation                                              	|
+| sql_queries.py            	| python file with sql queries for create tables and ets scripts 	|
+| test.ipyng                	| notebook dumping first 5 rows of each sql tables               	|
