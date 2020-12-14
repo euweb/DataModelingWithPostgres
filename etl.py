@@ -4,7 +4,9 @@ import os
 import pandas as pd
 import psycopg2
 
-from sql_queries import *
+from sql_queries import (artist_table_insert, song_select, song_table_insert,
+                         songplay_table_insert, time_table_insert,
+                         user_table_insert)
 
 
 def process_song_file(cur, filepath):
@@ -28,7 +30,6 @@ def process_song_file(cur, filepath):
     cur.execute(song_table_insert, song_data)
 
 
-
 def process_log_file(cur, filepath):
     # open log file
     df = pd.read_json(filepath, lines=True)
@@ -47,7 +48,7 @@ def process_log_file(cur, filepath):
                      'week', 'month', 'year', 'weekday')
     time_df = pd.DataFrame(list(time_data), list(column_labels)).T
 
-    for i, row in time_df.iterrows():
+    for _, row in time_df.iterrows():
         cur.execute(time_table_insert, list(row))
 
     # load user table
@@ -55,11 +56,11 @@ def process_log_file(cur, filepath):
                   'gender', 'level']].copy().drop_duplicates()
 
     # insert user records
-    for i, row in user_df.iterrows():
+    for _, row in user_df.iterrows():
         cur.execute(user_table_insert, row)
 
     # insert songplay records
-    for index, row in df.iterrows():
+    for _, row in df.iterrows():
 
         # get songid and artistid from song and artist tables
         cur.execute(song_select, (row.song, row.artist, row.length))
@@ -73,14 +74,14 @@ def process_log_file(cur, filepath):
         # insert songplay record
         songplay_data = (row.ts, row.userId, row.level, songid,
                          artistid, row.sessionId, row.location, row.userAgent)
-        
+
         cur.execute(songplay_table_insert, songplay_data)
 
 
 def process_data(cur, conn, filepath, func):
     # get all files matching extension from directory
     all_files = []
-    for root, dirs, files in os.walk(filepath):
+    for root, _, files in os.walk(filepath):
         files = glob.glob(os.path.join(root, '*.json'))
         for f in files:
             all_files.append(os.path.abspath(f))
@@ -100,15 +101,16 @@ def main():
     """
     - Establishes connection with the sparkify database and gets
     cursor to it.  
-    
+
     - Drops all the tables.  
-    
+
     - Creates all tables needed. 
-    
+
     - Finally, closes the connection. 
     """
     db_host = os.getenv('DB_HOST', 'localhost')
-    conn = psycopg2.connect("host=%s dbname=sparkifydb user=student password=student" % db_host)
+    conn = psycopg2.connect(
+        "host=%s dbname=sparkifydb user=student password=student" % db_host)
     cur = conn.cursor()
 
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)
