@@ -9,9 +9,9 @@ We use a star schema which is optimized for queries on the song play analysis. F
 
 We use Docker to create the necessary infrastructure for database, jupyter lab and a tool for managing database content. 
 
-## ER Diagramm
+## ER Diagram
 
-![ER Diagramm](https://github.com/euweb/DataModelingWithPostgres/blob/main/DataModelingWithPostgres.png?raw=true)
+![ER Diagram](https://github.com/euweb/DataModelingWithPostgres/blob/main/DataModelingWithPostgres.png?raw=true)
  
 ## Running using Docker
 
