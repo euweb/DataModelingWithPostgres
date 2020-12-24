@@ -12,13 +12,14 @@ songplay_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplays(
     songplay_id SERIAL PRIMARY KEY, 
     start_time timestamp, 
-    user_id int, 
+    user_id int NOT NULL, 
     level varchar, 
-    song_id varchar, 
-    artist_id varchar, 
+    song_id varchar NOT NULL, 
+    artist_id varchar NOT NULL, 
     session_id int, 
     location varchar, 
     user_agent varchar,
+    FOREIGN KEY (start_time) REFERENCES time (start_time),
     FOREIGN KEY (artist_id) REFERENCES artists (artist_id),
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (song_id) REFERENCES songs (song_id)
@@ -39,7 +40,7 @@ song_table_create = ("""
 CREATE TABLE IF NOT EXISTS songs (
     song_id varchar PRIMARY KEY,
     title varchar NOT NULL, 
-    artist_id varchar, 
+    artist_id varchar NOT NULL, 
     year int,
     duration numeric,
     FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
@@ -49,16 +50,16 @@ CREATE TABLE IF NOT EXISTS songs (
 artist_table_create = ("""
 CREATE TABLE IF NOT EXISTS artists (
     artist_id varchar PRIMARY KEY,
-    name varchar,
+    name varchar NOT NULL,
     location varchar, 
-    latitude int, 
-    longitude int
+    latitude float, 
+    longitude float
 )
 """)
 
 time_table_create = ("""
 CREATE TABLE IF NOT EXISTS time (
-    start_time timestamp, 
+    start_time timestamp PRIMARY KEY, 
     hour int, 
     day int,
     week int, 
