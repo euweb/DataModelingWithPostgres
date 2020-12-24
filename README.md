@@ -20,6 +20,14 @@ CREATE TABLE IF NOT EXISTS users (
     level varchar NOT NULL
 )
 
+CREATE TABLE IF NOT EXISTS artists (
+    artist_id varchar PRIMARY KEY,
+    name varchar NOT NULL,
+    location varchar, 
+    latitude float, 
+    longitude float
+)
+
 CREATE TABLE IF NOT EXISTS songs (
     song_id varchar PRIMARY KEY,
     title varchar NOT NULL, 
@@ -27,14 +35,6 @@ CREATE TABLE IF NOT EXISTS songs (
     year int,
     duration numeric,
     FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
-)
-
-CREATE TABLE IF NOT EXISTS artists (
-    artist_id varchar PRIMARY KEY,
-    name varchar NOT NULL,
-    location varchar, 
-    latitude float, 
-    longitude float
 )
 
 CREATE TABLE IF NOT EXISTS time (
