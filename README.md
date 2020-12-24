@@ -8,6 +8,10 @@ For this purpose a relational database and its schema should be created and an E
 We use a star schema which is optimized for queries on the song play analysis. For the data consistency we define constraints such as foreign keys or not null values. We use python programming language to implement the automated database creation and the running of ETL process / pipeline. There are two types of JSON files containing song data (artist and song data) and song play data (song plays and user information). We use jupyter lab for development of our ETL pipeline and transfer later the code to the python source file.
 
 We use Docker to create the necessary infrastructure for database, jupyter lab and a tool for managing database content. 
+
+## ER Diagramm
+
+![ER Diagramm](https://github.com/euweb/DataModelingWithPostgres/blob/main/DataModelingWithPostgres.png?raw=true)
  
 ## Running using Docker
 
@@ -50,3 +54,4 @@ If postgres and python are installed localy, you can run this project without do
 | README.md                 	| this documenation                                              	|
 | sql_queries.py            	| python file with sql queries for create tables and ets scripts 	|
 | test.ipyng                	| notebook dumping first 5 rows of each sql tables               	|
+
