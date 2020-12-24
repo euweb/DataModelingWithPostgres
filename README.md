@@ -9,7 +9,60 @@ We use a star schema which is optimized for queries on the song play analysis. F
 
 We use Docker to create the necessary infrastructure for database, jupyter lab and a tool for managing database content. 
 
-## ER Diagram
+## Database schema and ER Diagram
+
+```sql
+CREATE TABLE IF NOT EXISTS users (
+    user_id int PRIMARY KEY, 
+    first_name varchar NOT NULL,
+    last_name varchar NOT NULL, 
+    gender varchar(1) NOT NULL,
+    level varchar NOT NULL
+)
+
+CREATE TABLE IF NOT EXISTS songs (
+    song_id varchar PRIMARY KEY,
+    title varchar NOT NULL, 
+    artist_id varchar NOT NULL, 
+    year int,
+    duration numeric,
+    FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
+)
+
+CREATE TABLE IF NOT EXISTS artists (
+    artist_id varchar PRIMARY KEY,
+    name varchar NOT NULL,
+    location varchar, 
+    latitude float, 
+    longitude float
+)
+
+CREATE TABLE IF NOT EXISTS time (
+    start_time timestamp PRIMARY KEY, 
+    hour int, 
+    day int,
+    week int, 
+    month int,
+    year int, 
+    weekday int
+)
+
+CREATE TABLE IF NOT EXISTS songplays(
+    songplay_id SERIAL PRIMARY KEY, 
+    start_time timestamp NOT NULL, 
+    user_id int NOT NULL, 
+    level varchar NOT NULL, 
+    song_id varchar NOT NULL, 
+    artist_id varchar NOT NULL, 
+    session_id int, 
+    location varchar, 
+    user_agent varchar,
+    FOREIGN KEY (start_time) REFERENCES time (start_time),
+    FOREIGN KEY (artist_id) REFERENCES artists (artist_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id),
+    FOREIGN KEY (song_id) REFERENCES songs (song_id)
+)
+```
 
 ![ER Diagram](https://github.com/euweb/DataModelingWithPostgres/blob/main/DataModelingWithPostgres.png?raw=true)
  
