@@ -80,13 +80,13 @@ CREATE TABLE IF NOT EXISTS songplays(
         - data base: _PostgreSQL_
         - host: _db_
         - user: _student_
-        - passwort: _student_
+        - password: _student_
         - database: sparkifydb
     - navigate to tables
 
 ## Running without Docker
 
-If postgres and python are installed localy, you can run this project without docker
+If postgres and python are installed locally, you can run this project without docker
 
 1. clone this repository
 2. create database _studentdb_ and give user _student_ identified by _student_ password access to it
@@ -99,12 +99,12 @@ If postgres and python are installed localy, you can run this project without do
 |---------------------------	|----------------------------------------------------------------	|
 | data                      	| Folder containing JSON files                                   	|
 | create_tables.py          	| (re)creates tables in the database                             	|
-| Dashboard.ipyng           	| contains simple example of querieng the database               	|
+| Dashboard.ipynb           	| contains simple example for querying the database               	|
 | docker-compose.yml        	| composer file to start docker container                        	|
-| etl.ipyng                 	| notebook to develop the etl pipeline                           	|
+| etl.ipynb                 	| notebook to develop the etl pipeline                           	|
 | etl.py                    	| etl pipeline                                                   	|
-| InstallDependencies.ipyng 	| notebook to install nesessary python modules                   	|
-| README.md                 	| this documenation                                              	|
-| sql_queries.py            	| python file with sql queries for create tables and ets scripts 	|
-| test.ipyng                	| notebook dumping first 5 rows of each sql tables               	|
+| InstallDependencies.ipynb 	| notebook to install necessary python modules                   	|
+| README.md                 	| this documentation                                              	|
+| sql_queries.py            	| python file with sql queries for create tables and etl scripts 	|
+| test.ipynb                	| notebook dumping first 5 rows of each sql tables               	|
 
